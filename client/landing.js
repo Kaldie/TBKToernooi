@@ -2,6 +2,7 @@ import {Template} from 'meteor/templating';
 import {ReactiveVar} from 'meteor/reactive-var';
 
 import './landing.html'
+import './landing.css'
 
 Template.landing.oncreate( function() {
     this.counter = new ReactiveVar(0);
