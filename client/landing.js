@@ -2,10 +2,10 @@ import {Template} from 'meteor/templating';
 import {ReactiveVar} from 'meteor/reactive-var';
 
 import './landing.html'
+import './imageColumn.js'
 import './landing.css'
 
-Template.landing.oncreate( function() {
-    this.counter = new ReactiveVar(0);
+Template.landing.onCreated( function() {
 })
 
 Template.landing.helpers({
@@ -16,6 +16,6 @@ Template.landing.helpers({
 
 Template.landing.events({
     'click button'(event, instance) {
-	instance.counter.set(instance.counter.get() + 1)
+	console.log("here")
     }
 })
