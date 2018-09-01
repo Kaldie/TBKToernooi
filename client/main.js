@@ -1,12 +1,12 @@
 import '../imports/startup/accounts-config.js';
 import './landing.js'
-import './bitch.html'
+import './example.html'
 
 Router.configure({
     layoutTemplate: 'landing'
 })
 
-Route.route('/', function() {
+Router.route('/', function() {
     this.layout('landing')
-    this.render('bitch', {to: "main"});
+    this.render('example', {to: 'main'});
 })
