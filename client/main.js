@@ -16,12 +16,11 @@ Router.route('/', function() {
     this.render('example', {to: 'main'});
 })
 
-<<<<<<< HEAD
 Router.route('/overview', function() {
     this.layout('landing')
     this.render('RoundOverView', {to: 'main'});
 })
-=======
+
 Router.route('/admin', function() {
     this.layout('landing');
     this.render('admin', {to: 'main'});
@@ -42,4 +41,4 @@ Router.route('/admin/teams', function() {
     this.layout('landing');
     this.render('teams', {to: 'main'})
 });
->>>>>>> 8d1fe4c95ef361697f7f32742eea94977cf1894d
+
