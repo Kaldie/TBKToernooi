@@ -1,11 +1,7 @@
 import '../imports/startup/accounts-config.js';
 import './landing.js'
 import './example.html'
-import './admin.html'
-import './pools.html'
-import './rounds.html'
-import './scores.html'
-import './teams.html'
+import './admin/admin.js'
 
 Router.configure({
     layoutTemplate: 'landing'

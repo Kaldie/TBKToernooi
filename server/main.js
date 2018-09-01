@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import fs from 'fs'
 import path from 'path'
 
+import '../imports/api/teams.js';
+
 import {ImageCollection} from './imageCollection'
 
 Meteor.startup(() => {
