@@ -13,13 +13,11 @@ Template.imageColumn.onCreated( function() {
     Meteor.subscribe("Image", () => {
 	this.image = imageCollection;	
 	numberOfSponsors = this.image.find().count()	
+	this.imageId.set(0)
 	Meteor.setInterval(() => {
-	    console.warn("here!!")
 	    this.imageId.set(null)
 	    this.imageId.set(parseInt(Math.random() * numberOfSponsors));
-	    console.warn("image id: ", this.imageId.get())
 	}, Meteor.settings.public.sponsorRefreshRate);
-	this.imageId.set(0)
     })
 })
  
@@ -41,7 +39,6 @@ Template.imageColumn.helpers({
 	    return
 
 	if (instance.image) {
-	    console.warn("REACHED2", instance.imageId.get())
 	    const requestedImage = instance.image.findOne({"number":instance.imageId.get()})
 	    const fullSource = requestedImage.source
 	    return fullSource.split("public")[1]
