@@ -2,7 +2,7 @@ import {Template} from 'meteor/templating';
 import {Meteor} from 'meteor/meteor';
 import {ReactiveVar} from 'meteor/reactive-var';
 
-import { imageCollection } from './imageCollection'
+import { ImageCollection } from './imageCollection'
 //import { Image } from 'api/Image'
 import './imageColumn.html'
 import './imageColumn.css'
@@ -11,13 +11,11 @@ import './imageColumn.css'
 Template.imageColumn.onCreated( function() {
     this.imageId = new ReactiveVar(0);
     Meteor.subscribe("Image", () => {
-	this.image = imageCollection;	
+	this.image = ImageCollection;	
 	numberOfSponsors = this.image.find().count()	
 	Meteor.setInterval(() => {
-	    console.warn("here!!")
 	    this.imageId.set(null)
 	    this.imageId.set(parseInt(Math.random() * numberOfSponsors));
-	    console.warn("image id: ", this.imageId.get())
 	}, Meteor.settings.public.sponsorRefreshRate);
 	this.imageId.set(0)
     })
@@ -41,7 +39,6 @@ Template.imageColumn.helpers({
 	    return
 
 	if (instance.image) {
-	    console.warn("REACHED2", instance.imageId.get())
 	    const requestedImage = instance.image.findOne({"number":instance.imageId.get()})
 	    const fullSource = requestedImage.source
 	    return fullSource.split("public")[1]

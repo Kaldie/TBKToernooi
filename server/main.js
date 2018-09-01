@@ -3,6 +3,8 @@ import fs from 'fs'
 import path from 'path'
 
 import {ImageCollection} from './imageCollection'
+import {RoundsCollection} from './roundCollection'
+
 
 Meteor.startup(() => {
     try {
@@ -25,5 +27,35 @@ Meteor.startup(() => {
     })
     if (number === 0) {
 	throw "Did not find any images. Please supply nice images in: " + Meteor.settings.sponsorDir + " ."
-    }	
+    }
+
+    // create some bugus rounds
+    rounds = RoundsCollection.find().fetch()
+    currentLastRound = rounds.reduce((current, element) => current > element.roundNumber? current : element.roundNumber,0) || 0
+    const roundAdditions = [1,2]
+    roundAdditions.map((roundAddition) => {
+	RoundsCollection.insert({
+	    roundNumber : roundAddition + currentLastRound,
+	    matches : [
+		{
+		    team1:"lala",
+		    team2:"kala",
+		    table: 1 + roundAddition,
+		    poule: "A"
+		},
+		{
+		    team1:"beta",
+		    team2:"alpha",
+		    table: 2 + roundAddition,
+		    poule: "A"
+		},
+		{
+		    team1: "Nederland",
+		    team2: "Belgie",
+		    table: 3 + roundAddition,
+		    poule: "B"
+		}
+	    ]
+	})		
+    }) 
 });
