@@ -28,8 +28,7 @@ Meteor.startup(() => {
 	})
 	++number;
     })
-    console.warn(ImageCollection.find({}).fetch())
-    for (let aFile in files) {
-	console.log("File: ", aFile)
+    if (number === 0) {
+	throw "Did not find any images. Please supply nice images in: " + Meteor.settings.sponsorDir + " ."
     }
 });
