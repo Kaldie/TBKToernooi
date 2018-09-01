@@ -1,10 +1,9 @@
 import '../imports/startup/accounts-config.js';
 import './landing.js'
 import './example.html'
-<<<<<<< HEAD
 import './roundOverView.js'
-=======
 import './admin/admin.js'
+
 
 Router.configure({
     layoutTemplate: 'landing'
