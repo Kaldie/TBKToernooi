@@ -5,7 +5,6 @@ import './example.html'
 import './roundOverView.js'
 =======
 import './admin/admin.js'
->>>>>>> 8d1fe4c95ef361697f7f32742eea94977cf1894d
 
 Router.configure({
     layoutTemplate: 'landing'
