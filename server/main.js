@@ -5,9 +5,19 @@ import path from 'path'
 import {ImageCollection} from './imageCollection'
 
 Meteor.startup(() => {
-    console.warn("Meteor.settings.sponsorDir", Meteor.settings.sponsorDir)
-    var files = fs.readdirSync(Meteor.settings.sponsorDir)
-    ImageCollection.rawCollection().drop()
+    try {
+	var files = fs.readdirSync(Meteor.settings.sponsorDir)
+    } catch(error) {
+	console.log(error)
+	throw "Something went wrong with loading sponsor files, please verify that \n" + Meteor.settings.sponsorDir + " exists." 
+    }
+    ImageCollection.rawCollection().stats({},(error, result) => {
+	if (error=== undefined) {
+	    ImageCollection.rawCollection().drop()
+	} else {
+	    console.log("error", error)
+	}
+    })
     let number=0
     files.forEach((fileName) => {
 	ImageCollection.insert({
