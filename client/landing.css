@@ -18,7 +18,8 @@
 }
 
 #mid-col {
-    background-color: black;
+    /*background-color: black;*/
+    border: 1px solid black;
 }
 
 .login{
@@ -26,4 +27,10 @@
 }
 #login-dropdown-list{
     margin-left: -175px;
+}
+.title{
+    text-align: center;
+}
+.admin-menu{
+    text-align: center;
 }
