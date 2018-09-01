@@ -3,10 +3,8 @@ import {Meteor} from 'meteor/meteor';
 import {ReactiveVar} from 'meteor/reactive-var';
 
 import { imageCollection } from './imageCollection'
-//import { Image } from 'api/Image'
 import './imageColumn.html'
 import './imageColumn.css'
-
 
 Template.imageColumn.onCreated( function() {
     this.imageId = new ReactiveVar(0);
@@ -20,7 +18,6 @@ Template.imageColumn.onCreated( function() {
 	}, Meteor.settings.public.sponsorRefreshRate);
     })
 })
- 
 
 Template.imageColumn.helpers({
     sponsorName() {
