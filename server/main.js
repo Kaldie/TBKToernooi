@@ -11,15 +11,10 @@ Meteor.startup(() => {
 	console.log(error)
 	throw "Something went wrong with loading sponsor files, please verify that \n" + Meteor.settings.sponsorDir + " exists." 
     }
-    ImageCollection.rawCollection().stats({},(error, result) => {
-	if (error !== undefined || error !== null) {
-	    ImageCollection.rawCollection().drop()
-	} else {
-	    console.log("error from stats!", error)
-	}
-    })
-    let number=0
+    let number = 0
+    ImageCollection.remove({})
     files.forEach((fileName) => {
+	console.info("Insert image: " + fileName)
 	ImageCollection.insert({
 	    "sponsorName": fileName.split("_")[0],
 	    "position": fileName.split("_")[1],
@@ -30,5 +25,5 @@ Meteor.startup(() => {
     })
     if (number === 0) {
 	throw "Did not find any images. Please supply nice images in: " + Meteor.settings.sponsorDir + " ."
-    }
+    }	
 });

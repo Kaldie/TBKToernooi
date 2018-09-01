@@ -1,5 +1,4 @@
-.imageColumn {
-    width: 30px;
-    hight: 80px;
+.imageColumn img {
+    max-width: 200px;
 }
 

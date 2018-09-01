@@ -2,41 +2,48 @@ import {Template} from 'meteor/templating';
 import {Meteor} from 'meteor/meteor';
 import {ReactiveVar} from 'meteor/reactive-var';
 
-import { imageCollection } from './imageCollection.js'
+import { imageCollection } from './imageCollection'
+//import { Image } from 'api/Image'
 import './imageColumn.html'
+import './imageColumn.css'
 
 
 Template.imageColumn.onCreated( function() {
     this.imageId = new ReactiveVar(0);
     Meteor.subscribe("Image", () => {
-
 	this.image = imageCollection;	
-	numberOfSponsors = this.image.find().count()
-
+	numberOfSponsors = this.image.find().count()	
 	Meteor.setInterval(() => {
 	    console.warn("here!!")
+	    this.imageId.set(null)
 	    this.imageId.set(parseInt(Math.random() * numberOfSponsors));
 	    console.warn("image id: ", this.imageId.get())
-
 	}, Meteor.settings.public.sponsorRefreshRate);
+	this.imageId.set(0)
     })
 })
  
-				
+
 Template.imageColumn.helpers({
     sponsorName() {
 	const instance = Template.instance()
-	instance.imageId.get()
+	if (instance.imageId.get() === null)
+	    return
+	
 	if (instance.image) {
-	    return instance.image.findOne({"number":instance.imageId.get()}).sponsorName
+	    const requestedImage = instance.image.findOne({"number":instance.imageId.get()})
+	    return requestedImage.sponsorName || "unknown"
 	}
     },
     source() {
-	const instance = Template.instance()	
-	instance.imageId.get()
+	const instance = Template.instance()
+	if (instance.imageId.get() === null)
+	    return
+
 	if (instance.image) {
-	    console.warn("instance.image.findOne({number:instance.imageId.get()}).source", instance.image.findOne({"number":instance.imageId.get()}).source)
-	    const fullSource = instance.image.findOne({"number":instance.imageId.get()}).source
+	    console.warn("REACHED2", instance.imageId.get())
+	    const requestedImage = instance.image.findOne({"number":instance.imageId.get()})
+	    const fullSource = requestedImage.source
 	    return fullSource.split("public")[1]
 	}
     }
