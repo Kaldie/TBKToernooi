@@ -22,3 +22,4 @@ twbs:bootstrap
 underscore
 accounts-ui
 accounts-password
+iron:router
