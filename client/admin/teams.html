@@ -1,0 +1,36 @@
+<template name="teams">
+    <h1 class="title">Teams</h1>
+    <hr>
+    <div class="row">
+        <div class="col-md-8">
+            {{#each teams}}
+            {{> team}}
+            {{/each}}
+        </div>
+        <div class="col-md-4">
+            <form class="new-team">
+                <input type="text" name="name" placeholder="Type to add new team" />
+            </form>
+        </div>
+    </div>
+</template>
+
+<template name="team">
+    <ul class="list-group">
+        <li class="list-group-item">
+            <span class="badge admin-team-playercount">{{playernames.length}}</span>
+            <p class="admin-team-name">{{name}}</p>
+            <ul class="list-group">
+                {{#each playernames}}
+                <li class="list-group-item">{{this}}</li>
+                {{/each}}
+                <li class="list-group-item">
+                    <form class="new-player">
+                        <input type="hidden" name="teamId" value="{{_id}}">
+                        <input type="text" name="playername" placeholder="Type to add new player" />
+                    </form>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</template>
