@@ -20,4 +20,10 @@
 #mid-col {
     background-color: black;
 }
-    
+
+.login{
+    text-align: right;
+}
+#login-dropdown-list{
+    margin-left: -175px;
+}
