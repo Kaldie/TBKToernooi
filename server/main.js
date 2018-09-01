@@ -12,10 +12,10 @@ Meteor.startup(() => {
 	throw "Something went wrong with loading sponsor files, please verify that \n" + Meteor.settings.sponsorDir + " exists." 
     }
     ImageCollection.rawCollection().stats({},(error, result) => {
-	if (error=== undefined) {
+	if (error !== undefined || error !== null) {
 	    ImageCollection.rawCollection().drop()
 	} else {
-	    console.log("error", error)
+	    console.log("error from stats!", error)
 	}
     })
     let number=0
