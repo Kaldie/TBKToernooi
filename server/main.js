@@ -4,8 +4,8 @@ import path from 'path'
 
 import '../imports/api/teams.js';
 
-import {ImageCollection} from './imageCollection'
-import {RoundsCollection} from './roundCollection'
+import { ImageCollection } from './imageCollection.js'
+import { RoundsCollection } from './roundCollection.js'
 
 
 Meteor.startup(() => {

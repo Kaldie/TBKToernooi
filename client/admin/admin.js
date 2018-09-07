@@ -3,11 +3,11 @@ import './pools.html'
 import './rounds.html'
 import './scores.html'
 import './teams.html'
-import './teams.js'
+import './teams'
 
 import { Template } from 'meteor/templating';
 
-import { Teams } from '../../imports/api/teams.js';
+import { Teams } from '../../imports/api/teams';
 
 Template.teams.onCreated(function teamOnCreated() {
     Meteor.subscribe('teams');

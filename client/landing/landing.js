@@ -1,10 +1,10 @@
-import {Template} from 'meteor/templating';
-import {ReactiveVar} from 'meteor/reactive-var';
+import { Template } from 'meteor/templating';
+import { Meteor } from 'meteor/meteor';
 
 import './landing.html'
-import './imageColumn.js'
+import '../imageColumn/imageColumn.js'
 import './landing.css'
-import { Meteor } from 'meteor/meteor';
+
 
 Template.landing.onCreated( function() {
 })

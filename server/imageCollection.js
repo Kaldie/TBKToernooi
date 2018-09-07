@@ -8,3 +8,4 @@ export var ImageCollection = new Mongo.Collection("Image", {
 Meteor.publish("Image", function() {
     return ImageCollection.find({})
 })
+
