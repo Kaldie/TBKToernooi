@@ -1,8 +1,8 @@
-import {Mongo} from 'meteor/mongo'
-import {Rounds} from '/api/RoundCollection'
+import { Mongo } from 'meteor/mongo'
+import { Round } from '/api/Round'
 
 export var RoundsCollection = new Mongo.Collection("Rounds", {
-    transform: (doc => new Rounds(doc))
+    transform: (doc => new Round(doc))
 })
 
 Meteor.publish("Rounds", function() {

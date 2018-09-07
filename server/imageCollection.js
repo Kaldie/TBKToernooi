@@ -1,5 +1,5 @@
 import {Mongo} from 'meteor/mongo'
-import {Image} from '/api/ImageCollection'
+import {Image} from '/api/Image'
 
 export var ImageCollection = new Mongo.Collection("Image", {
     transform: (doc => new Image(doc))

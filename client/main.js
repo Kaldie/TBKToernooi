@@ -1,9 +1,8 @@
-import '../imports/startup/accounts-config.js';
+import '../accounts-config.js';
 import './landing/landing.js'
 import './example.html'
-import './rounds/roundOverView.js'
 import './admin/admin.js'
-
+import './rounds/roundOverView.js'
 
 Router.configure({
     layoutTemplate: 'landing'

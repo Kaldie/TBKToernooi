@@ -1,14 +1,11 @@
 import { Meteor } from 'meteor/meteor'
 
-//Template.round.onCreated( function(
+import './round.html'
+import './match.html'
 
-Template.round.Helpers({
-    name() {
-	if (Template.instance().name) {
-	    return Template.instance().name
+
+Template.Round.helpers({
+	getMatches() {
+		return Template.instance().data.getMatches()
 	}
-    },
 })
-	
-
-

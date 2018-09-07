@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { Meteor } from 'meteor/meteor';
 
 import './landing.html'
-import '../imageColumn/imageColumn.js'
+import '../imageColumn/imageColumn'
 import './landing.css'
 
 
@@ -20,6 +20,5 @@ Template.landing.helpers({
 
 Template.landing.events({
     'click button'(event, instance) {
-	console.log("here")
     }
 })

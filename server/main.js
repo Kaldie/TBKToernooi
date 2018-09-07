@@ -2,10 +2,12 @@ import { Meteor } from 'meteor/meteor';
 import fs from 'fs'
 import path from 'path'
 
-import '../imports/api/teams.js';
+import '../api/teams.js';
 
 import { ImageCollection } from './imageCollection.js'
 import { RoundsCollection } from './roundCollection.js'
+
+import { Match } from '/api/Match'
 
 
 Meteor.startup(() => {
@@ -59,5 +61,7 @@ Meteor.startup(() => {
 		}
 	    ]
 	})		
-    }) 
+	})
+	console.log(new Match(RoundsCollection.findOne().getMatches()[0]))
+	new Match(RoundsCollection.findOne().getMatches()[0]).setResult(1,1) 
 });
