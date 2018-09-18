@@ -4,37 +4,38 @@ import path from 'path'
 
 import '../api/teams.js';
 
-import { ImageCollection } from './imageCollection.js'
-import { RoundsCollection } from './roundCollection.js'
+import  { ImageCollection } from '../api/collections/imageCollection.js'
+import  { RoundsCollection } from '../api/collections/roundCollection.js'
 
-import { Match } from '/api/Match'
+import { Round } from '/api/Round.js';
+import { Match } from '/api/Match.js'
 
-
-Meteor.startup(() => {
+var readSponsorImages = function() {
     try {
-	var files = fs.readdirSync(Meteor.settings.sponsorDir)
+		var files = fs.readdirSync(Meteor.settings.sponsorDir)
     } catch(error) {
-	console.log(error)
-	throw "Something went wrong with loading sponsor files, please verify that \n" + Meteor.settings.sponsorDir + " exists." 
+		console.log(error)
+		throw "Something went wrong with loading sponsor files, please verify that \n" + Meteor.settings.sponsorDir + " exists." 
     }
     let number = 0
     ImageCollection.remove({})
     files.forEach((fileName) => {
-	console.info("Insert image: " + fileName)
-	ImageCollection.insert({
-	    "sponsorName": fileName.split("_")[0],
-	    "position": fileName.split("_")[1],
-	    "source": path.join(Meteor.settings.sponsorDir, fileName),
-	    "number": number
-	})
-	++number;
+		console.info("Insert image: " + fileName)
+		ImageCollection.insert({
+			"sponsorName": fileName.split("_")[0],
+			"position": fileName.split("_")[1],
+			"source": path.join(Meteor.settings.sponsorDir, fileName),
+			"number": number
+		})
+		++number;
     })
     if (number === 0) {
-	throw "Did not find any images. Please supply nice images in: " + Meteor.settings.sponsorDir + " ."
+		throw "Did not find any images. Please supply nice images in: " + Meteor.settings.sponsorDir + " ."
     }
+}
 
-    // create some bugus rounds
-    rounds = RoundsCollection.find().fetch()
+var addBogusRounds = function() {
+	rounds = RoundsCollection.find().fetch()
     currentLastRound = rounds.reduce((current, element) => current > element.roundNumber? current : element.roundNumber,0) || 0
     const roundAdditions = [1,2]
     roundAdditions.map((roundAddition) => {
@@ -42,26 +43,43 @@ Meteor.startup(() => {
 	    roundNumber : roundAddition + currentLastRound,
 	    matches : [
 		{
-		    team1:"lala",
+			id: 1,
+			team1:"lala",
 		    team2:"kala",
 		    table: 1 + roundAddition,
-		    poule: "A"
+			poule: "A",
+			hasResults: false
 		},
 		{
+			id: 2,
 		    team1:"beta",
 		    team2:"alpha",
 		    table: 2 + roundAddition,
-		    poule: "A"
+			poule: "A",
+			hasResults: false
 		},
 		{
+			id: 3,
 		    team1: "Nederland",
 		    team2: "Belgie",
 		    table: 3 + roundAddition,
-		    poule: "B"
+			poule: "B",
+			hasResults: false
 		}
 	    ]
 	})		
 	})
-	console.log(new Match(RoundsCollection.findOne().getMatches()[0]))
-	new Match(RoundsCollection.findOne().getMatches()[0]).setResult(1,1) 
+}
+
+var updateMatchResult = function() {
+	const round = new Round(RoundsCollection.findOne())
+	const aMatch = new Match(round.getMatches()[0])
+	aMatch.setResult(10,1) 
+	round.updateMatch(aMatch)
+}
+
+Meteor.startup(() => {
+	readSponsorImages()
+	addBogusRounds()
+    updateMatchResult() 
 });

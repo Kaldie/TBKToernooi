@@ -1,4 +1,4 @@
-import '../accounts-config.js';
+import './accounts-config.js';
 import './landing/landing.js'
 import './example.html'
 import './admin/admin.js'

@@ -1,14 +1,15 @@
 import { Meteor } from 'meteor/meteor'
-import {RoundCollection} from './roundCollection.js'
+import { RoundsCollection } from '/api/collections/roundCollection.js'
 
 import './roundOverView.html'
 import './roundOverView.css'
 import './round.js'
 
 Template.RoundOverView.onCreated(function() {
-    this.isLoaded = new ReactiveVar(false)
+	this.isLoaded = new ReactiveVar(false)
+	this.roundsCollection = RoundsCollection
 	Meteor.subscribe("Rounds", () => {
-		this.roundCollection = RoundCollection
+		
 		this.isLoaded.set(true)
     })
 })
@@ -16,11 +17,12 @@ Template.RoundOverView.onCreated(function() {
 Template.RoundOverView.helpers({
     getRounds() {
 		const instance = Template.instance()
-		if (instance.isLoaded.get() && instance.roundCollection) {
-			return instance.roundCollection.find({}).fetch()
+		if (instance.isLoaded.get() && instance.roundsCollection) {
+			return instance.roundsCollection.find({}).fetch()
 		}
-    },
-    isFirstRound(roundNumber) {
+	},
+	
+    isOngoingRound(roundNumber) {
 	return roundNumber === 1 ? false: true
 	},
 })
