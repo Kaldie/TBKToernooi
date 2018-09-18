@@ -18,11 +18,14 @@
 <template name="team">
     <ul class="list-group">
         <li class="list-group-item">
-            <span class="badge admin-team-playercount">{{playernames.length}}</span>
+            <span class="badge admin-team-remove-team">x</span>
             <p class="admin-team-name">{{name}}</p>
             <ul class="list-group">
-                {{#each playernames}}
-                <li class="list-group-item">{{this}}</li>
+                {{#each playername in playernames}}
+                <li class="list-group-item" value={{playername  }}>
+                    {{playername}} 
+                    <span class="badge badge-primary badge-pill remove-player" playername={{playername}}>x</span>
+                </li>
                 {{/each}}
                 <li class="list-group-item">
                     <form class="new-player">

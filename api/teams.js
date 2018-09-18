@@ -18,15 +18,29 @@ Meteor.methods({
             createdAt: new Date()
         });
     },
+    'teams.remove'(teamId) {
+        Teams.remove({
+            _id : teamId
+        })
+    },
     'teams.addPlayer'(teamId, playername) {
         check(teamId, String);
         check(playername, String);
         const team = Teams.findOne(teamId);
+        var playerArray
         if(team.playernames != null) {
-            var playerArray = team.playernames;
+            playerArray = team.playernames;
             playerArray.push(playername);
+        } else {
+            playerArray = [playername];
         }
-        else var playerArray = [playername];
         Teams.update(teamId, { $set: { playernames: playerArray } });
     },
+    'teams.removePlayer'(teamId, playerName) {
+        check(teamId, String);
+        check(playerName, String);
+        const team = Teams.findOne(teamId);
+        const newPlayerNames = team.playernames.filter((aPlayerName) => playerName !== aPlayerName)
+        Teams.update(teamId, { $set: {playernames: newPlayerNames}})
+    }
 });
