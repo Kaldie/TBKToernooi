@@ -22,6 +22,7 @@ Meteor.methods({
         Teams.remove({
             _id : teamId
         })
+        //TODO remove rounds were this team plays in!
     },
     'teams.addPlayer'(teamId, playername) {
         check(teamId, String);

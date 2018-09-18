@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 
-import { Teams } from '../../api/teams';
+import { Teams } from '../../../api/teams';
+
+import './teams.html'
 
 Template.teams.onCreated(function teamOnCreated() {
     Meteor.subscribe('teams');
