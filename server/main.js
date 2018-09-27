@@ -73,9 +73,13 @@ var addBogusRounds = function() {
 
 var updateMatchResult = function() {
 	const round = new Round(RoundsCollection.findOne())
-	const aMatch = new Match(round.getMatches()[0])
-	aMatch.setResult(10,1) 
-	round.updateMatch(aMatch)
+	const matches = round.getMatches()
+	console.log(matches)
+	if (matches.lenth > 0) {
+		const aMatch = new Match(round.getMatches()[0])
+		aMatch.setResult(10,1) 
+		round.updateMatch(aMatch)
+	}
 }
 
 Meteor.startup(() => {

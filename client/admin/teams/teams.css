@@ -1,0 +1,15 @@
+.dropdown-container {
+  position: relative;
+  margin-right: 5px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+}
+
+.green-box {
+  overflow: hidden; /* Creates a new block format context, which will make this tag fill the remaining width */
+  background: green;
+  color: white;
+}

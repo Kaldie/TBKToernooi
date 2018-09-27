@@ -1,7 +1,8 @@
 import { _ } from 'underscore'
-import {RoundsCollection} from './collections/roundCollection'
-import { throws } from 'assert';
+import { RoundsCollection } from './collections/roundCollection'
+import { validateTeamPoules } from './teams'
 import { Match } from './Match'
+import { Meteor } from 'meteor/meteor';
 
 
 export class Round {
@@ -14,8 +15,12 @@ export class Round {
         return this
     }
 
+    delete() {
+        RoundsCollection.remove({"_id" : this._id})
+    }
+
     getMatches() {
-        return this.matches
+        return this.matches || []
     }
 
     getMatch(aTeamName, aSecondTeamName = undefined) {
@@ -26,6 +31,30 @@ export class Round {
             }
             return previousResult
         },[])
+    }
+
+    roundNumber() {
+        return this.roundNumber || 0
+    }
+
+    addMatch(match) {
+        if (!match.poule) {
+            if (Meteor.isClient) {
+                Meteor.subscribe("team", () => {
+                    match.poule = validateTeamPoules(match.team1, match.team2) || "unknown"
+                })
+            } else {
+
+            }
+            match.poule = validateTeamPoules(match.team1, match.team2) || "unknown"
+        }
+
+        
+        RoundsCollection.update({
+            _id: this._id
+        }, {
+            $push: {matches: match}
+        })
     }
 
     updateMatch(match) {
