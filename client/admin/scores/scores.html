@@ -1,51 +1,43 @@
 <template name="scores">
-    <h1 class="title">Scores</h1>
-
-
-  <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Rounds <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-    {{#each roundNumber in roundNumbers}}
-      <li><a href="#" class=RoundNumberSelectionAction>Round {{roundNumber}}</a></li>
-    {{/each}}
-    </ul>
-  </div>
+  <h1 class="title">Scores {{#if currentRoundHelper}}round {{currentRoundHelper}} {{/if}} </h1>
 
   {{#each match in matches}}
+     <div class="form-group">
+      <div class="row results-row">
+          <form id="update-match-{{match.id}}">
+            <input type="hidden" name="matchId" value="{{match.id}}">
+            <div class=col-xs-4>
+                score {{match.team1}}
+              <input class="form-control" type="number" name="team1Score" min="0" max="9" placeholder="score team {{match.team1}}" value="{{getResult match 1}}">
+            </div>
 
-    <div class="form-group {{#if areValidTeams}} has-success {{else}} has-error {{/if}}">
+            <div class=col-xs-4>
+                score {{match.team2}}
+                <input class="form-control" type="number" name="team2Score" min="0" max="9" placeholder="score team {{match.team2}}" value="{{getResult match 2}}">
+            </div>
 
-      <div class="row">
-        <div class=col-xs-6>
-          {{team1}}
-          <br>
-          <select class="form-control teamScore" name="team1Score">
-              <option value="disabled" disabled selected>Number of points team 1</option>
-                {{#each values}}
-                  <option value="{{this}}">{{this}}</option>
-                {{/each}}
-            </select>
-        </div>
-
-        <div class=col-xs-6>
-            {{team2}}
-          <br>  
-          <select class="form-control teamScore" name="team2Score">
-              <option value="disabled" disabled selected>Number of points team 1</option>
-              {{#each values}}
-                  <option value="{{this}}">{{this}}</option>
-                {{/each}}
-            </select>
-        </div>
+            <div class="col-xs-4 button-column" >
+                <button type="submit" form="update-match-{{match.id}}" value="Submit" class="btn submit-btn">
+                  Update Round
+                </button>
+            </div>
+          </form>
       </div>  
     </div>  
   {{/each}}
 
 
-</template>
+  <div class="row">
+    <div class=col-xs-12>
+        <button type="button" class="btn btn-info dropdown-toggle select-round-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Select Round <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+        {{#each roundNumber in roundNumbers}}
+          <li><a href="#" class=RoundNumberSelectionAction>Round {{roundNumber}}</a></li>
+        {{/each}}
+        </ul>
+    </div>
+  </div>
 
-<template name="score">
-  
 </template>

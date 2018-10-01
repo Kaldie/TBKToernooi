@@ -1,0 +1,35 @@
+#mid-col > div > div:nth-child(1) > button, .submit-btn {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.results-row {
+  overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.submit-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0; 
+}
+
+.button-column{
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+[id^='update-match-']:valid .submit-btn {
+  background-color: #5cb85c;
+    border-color: #4cae4c;
+    color: #fff;
+}
+
+[id^='update-match-']:invalid .submit-btn {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}

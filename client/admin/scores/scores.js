@@ -4,6 +4,7 @@ import {reactiveVar, ReactiveVar} from 'meteor/reactive-var'
 import { RoundsCollection } from '/api/collections/roundCollection'
 
 import './scores.html'
+import './scores.css'
 import '/client/rounds/round'
 import '/client/rounds/match'
 
@@ -18,40 +19,56 @@ Template.scores.onCreated(function() {
 
 Template.scores.helpers({
   roundNumbers() {
-    if (Template.instance().isLoadeded.get()) {
-      console.warn("RoundsCollection.find({},{fields:{roundNumber:1}}).fetch()", RoundsCollection.find({},{fields:{roundNumber:1}}).fetch().map((element) => { return element.roundNumber}))
-      return RoundsCollection.find({},{fields:{roundNumber:1}}).fetch().map((element) => { return element.roundNumber})
-    } else {
-      return []
-    }
-  },
-  currentRound() {
-    Template.instance().data.isOnGoing() || Template.instance().data.willStart()
+    return RoundsCollection.find({}, {fields: {"roundNumber": 1}, sort: {"roundNumber": 1}})
+    .fetch()
+    .map((element) => element.roundNumber);
   },
 
   matches() {
-    const template = Template.instance()
-    const currentSelectRoundNumber = template.currentRoundNumber.get()
-    if (currentSelectRoundNumber) {
-      return RoundsCollection.find({roundNumber: currentSelectRoundNumber}, {fields: {matches: 1}}).fetch()
-    } else {
-      return undefined
+    const instance = Template.instance()
+    const currentRoundNumber = instance.currentRoundNumber.get()
+    if (instance.isLoadeded.get() && currentRoundNumber) {
+      const currentRound = RoundsCollection.find({roundNumber : currentRoundNumber}).fetch()[0]
+      const matches = currentRound.getMatches()
+      matches.sort((left, right) => left.id - right.id)
+      console.warn(matches)
+      return matches
+    }
+    return []
+  },
+
+  getResult(match, teamNumber) {
+    if (match.hasResults) {
+      if (teamNumber === 1) {
+        return match.team1Points
+      } else if (teamNumber === 2) {
+        return match.team2Points
+      }
     }
   },
-  values() {
-    return [...Array(10).keys()]
+
+  currentRoundHelper() {
+    return Template.instance().currentRoundNumber.get()
   }
 })
 
 
 
 Template.scores.events({
-  'change .RoundNumberSelectionAction' (event, template) {
-    console.warn("here")
-    const select = event.target
-    template.currentRoundNumber.set(select.options[select.selectedIndex].value)
-    console.warn("template.currentRoundNumber.get", template.currentRoundNumber())
-  } 
+  'click .RoundNumberSelectionAction' (event, template) {
+    template.currentRoundNumber.set(parseInt(event.target.text.split(" ")[1]))
+  },
+
+  'submit [id^="update-match-"]' (event, template) {
+    // Prevent default browser form submit
+    event.preventDefault();
+    const target = event.target;
+
+    const currentRound = RoundsCollection.find({roundNumber : template.currentRoundNumber.get()}).fetch()[0]
+    const currentMatch = currentRound.getMatchById(parseInt(target.matchId.value))
+    currentMatch.setResult(parseInt(target.team1Score.value), parseInt(target.team2Score.value))
+    currentRound.updateMatch(currentMatch)
+  }
 })
 
 

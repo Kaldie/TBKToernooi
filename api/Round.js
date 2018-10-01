@@ -33,6 +33,19 @@ export class Round {
         },[])
     }
 
+    getMatchById(id) {       
+        const matches = this.matches.filter((element) => {
+            console.info("element", element) 
+            return element.id === id
+        })
+        if (matches.length > 1) {
+            throw "Fucked up"
+        } else if (matches.length === 0) {
+            throw "no match with id " + id + "is found"
+        }
+        return matches[0]
+    }
+
     roundNumber() {
         return this.roundNumber || 0
     }
