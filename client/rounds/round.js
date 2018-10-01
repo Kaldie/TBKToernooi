@@ -1,5 +1,3 @@
-import { Meteor } from 'meteor/meteor'
-import { Match} from './match'
 import './round.html'
 
 

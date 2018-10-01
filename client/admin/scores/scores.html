@@ -1,0 +1,51 @@
+<template name="scores">
+    <h1 class="title">Scores</h1>
+
+
+  <div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Rounds <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+    {{#each roundNumber in roundNumbers}}
+      <li><a href="#" class=RoundNumberSelectionAction>Round {{roundNumber}}</a></li>
+    {{/each}}
+    </ul>
+  </div>
+
+  {{#each match in matches}}
+
+    <div class="form-group {{#if areValidTeams}} has-success {{else}} has-error {{/if}}">
+
+      <div class="row">
+        <div class=col-xs-6>
+          {{team1}}
+          <br>
+          <select class="form-control teamScore" name="team1Score">
+              <option value="disabled" disabled selected>Number of points team 1</option>
+                {{#each values}}
+                  <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class=col-xs-6>
+            {{team2}}
+          <br>  
+          <select class="form-control teamScore" name="team2Score">
+              <option value="disabled" disabled selected>Number of points team 1</option>
+              {{#each values}}
+                  <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+        </div>
+      </div>  
+    </div>  
+  {{/each}}
+
+
+</template>
+
+<template name="score">
+  
+</template>
