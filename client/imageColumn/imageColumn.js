@@ -3,24 +3,21 @@ import {Meteor} from 'meteor/meteor';
 import {ReactiveVar} from 'meteor/reactive-var';
 
 import { ImageCollection } from './imageCollection'
-//import { Image } from 'api/Image'
 import './imageColumn.html'
 import './imageColumn.css'
-
 
 Template.imageColumn.onCreated( function() {
     this.imageId = new ReactiveVar(0);
     Meteor.subscribe("Image", () => {
 	this.image = ImageCollection;	
 	numberOfSponsors = this.image.find().count()	
+	this.imageId.set(0)
 	Meteor.setInterval(() => {
 	    this.imageId.set(null)
 	    this.imageId.set(parseInt(Math.random() * numberOfSponsors));
 	}, Meteor.settings.public.sponsorRefreshRate);
-	this.imageId.set(0)
     })
 })
- 
 
 Template.imageColumn.helpers({
     sponsorName() {
