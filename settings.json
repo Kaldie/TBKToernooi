@@ -1,7 +1,7 @@
 {
-    "sponsorDir" : "/home/dbergmans/code/TBKToernooi/public/images",
+    "sponsorDir" : "/home/ruud/projects/TBKToernooi/public/images",
     "public": {
-	"sponsorRefreshRate": 10000
+	    "sponsorRefreshRate": 5000
     }
 }
 

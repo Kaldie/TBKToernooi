@@ -1,0 +1,55 @@
+<template name="teams">
+    <h1 class="title">Teams</h1>
+    <hr>
+    <div class="row">
+        <div class="col-md-8">
+            {{#each teams}}
+            {{> team}}
+            {{/each}}
+        </div>
+        <div class="col-md-4">
+            <form class="new-team">
+                <input type="text" name="name" placeholder="Type to add new team" />
+            </form>
+        </div>
+    </div>
+</template>
+
+<template name="team">
+    <ul class="list-group">
+        <li class="list-group-item">
+                <div class="admin-team-name">{{name}}
+                    <button type="button" class="btn btn-danger btn-xs pull-right admin-team-remove-team">x</button>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="sizing-addon1">Poule</span>
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select poule <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                            {{#each poule in poules }}
+                            <li><a href="#" class="pouleAction">{{poule}}</a></li>
+                            {{/each}}
+                            </ul>
+                        </div><!-- /btn-group -->
+                        <input type="text" class="form-control poule-form-control" name="poule" aria-label="..." placeholder="Poule" value={{pouleName}}>
+                        </div><!-- /input-group -->
+                    </div>
+
+
+
+            <ul class="list-group">
+                {{#each playername in playernames}}
+                <li class="list-group-item" value={{playername  }}>
+                    {{playername}} 
+                    <span class="btn btn-danger btn-xs remove-team pull-right remove-player" playername={{playername}}>x</span>
+                </li>
+                {{/each}}
+                <li class="list-group-item">
+                    <form class="new-player">
+                        <input type="hidden" name="teamId" value="{{_id}}">
+                        <input type="text" name="playername" placeholder="Type to add new player" />
+                    </form>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</template>

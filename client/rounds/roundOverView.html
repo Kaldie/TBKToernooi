@@ -1,0 +1,10 @@
+<template name="RoundOverView">
+	<h1>Round Overview</h1>
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		<div class="panel panel-default">
+			{{#each getRounds}}
+				{{> Round}}
+			{{/each}}
+		</div>
+	</div>
+</template>

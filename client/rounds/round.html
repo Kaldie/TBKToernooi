@@ -1,0 +1,44 @@
+<template name="Round">
+    <div class="panel-heading" role="tab" id="heading{{roundNumber}}">
+				<h4 class="panel-title">
+					<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{roundNumber}}" aria-expanded="true"
+					  aria-controls="collapse{{roundNumber}}">
+						Round #{{roundNumber}}
+					</a>
+				</h4>
+			</div>
+			<div id="collapse{{roundNumber}}" class="panel-collapse {{#unless isInteresting}} collapse {{/unless}}" role="tabpanel" aria-labelledby="heading{{roundNumber}}">
+				<div class="panel-body">
+					<table class="table table-striped table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>
+									Team 1
+								</th>
+								<th>
+									Team 2
+								</th>
+								<th>
+									Table number
+								</th>
+								<th>
+									Poule
+								</th>
+								<th>
+									Score
+								</th>
+							</tr>
+						</thead>
+
+						<tbody>
+              {{#each getMatches}}
+                {{> Match}}
+							{{/each}}
+						</tbody>
+					</table>
+
+				</div>
+      </div>
+</template>
+
+

@@ -2,14 +2,14 @@ import {Template} from 'meteor/templating';
 import {Meteor} from 'meteor/meteor';
 import {ReactiveVar} from 'meteor/reactive-var';
 
-import { imageCollection } from './imageCollection'
+import { ImageCollection } from './imageCollection'
 import './imageColumn.html'
 import './imageColumn.css'
 
 Template.imageColumn.onCreated( function() {
     this.imageId = new ReactiveVar(0);
     Meteor.subscribe("Image", () => {
-	this.image = imageCollection;	
+	this.image = ImageCollection;	
 	numberOfSponsors = this.image.find().count()	
 	this.imageId.set(0)
 	Meteor.setInterval(() => {

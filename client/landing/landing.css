@@ -6,6 +6,7 @@
 #jumbotronText {
     font-size: 16px;
     font-size: 4vw;
+    text-align: center;
 }
 
 
@@ -18,7 +19,8 @@
 }
 
 #mid-col {
-    background-color: black;
+    /*background-color: black;*/
+    border: 1px solid black;
 }
 
 .login{
@@ -26,4 +28,17 @@
 }
 #login-dropdown-list{
     margin-left: -175px;
+}
+.title{
+    text-align: center;
+}
+.admin-menu{
+    text-align: center;
+}
+.admin-team-name{
+    font-weight: bold;
+    font-size: 20px;
+}
+.admin-team-playercount{
+    font-size: 20px;
 }

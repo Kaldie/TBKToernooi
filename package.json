@@ -8,8 +8,11 @@
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
-    "@babel/runtime": "7.0.0-beta.55",
-    "meteor-node-stubs": "^0.4.1"
+    "@babel/runtime": "^7.0.0-beta.55",
+    "bcrypt": "^3.0.0",
+    "bootstrap": "3",
+    "meteor-node-stubs": "^0.4.1",
+    "underscore": "^1.9.1"
   },
   "meteor": {
     "mainModule": {

@@ -1,0 +1,8 @@
+.imageColumn img {
+    max-width: 200px;
+}
+
+.imageColumn {
+    vertical-align:middle;
+    text-align:center
+}
