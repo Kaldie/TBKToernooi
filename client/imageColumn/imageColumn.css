@@ -4,5 +4,7 @@
 
 .imageColumn {
     vertical-align:middle;
-    text-align:center
+    text-align:center;
+    padding-top:5px;
+    padding-bottom:5px;
 }
