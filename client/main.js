@@ -1,17 +1,23 @@
-import './accounts-config.js';
 import './landing/landing.js'
-import './example.html'
 import './admin/admin.js'
 import './rounds/roundOverView.js'
 
-Router.configure({
-    layoutTemplate: 'landing'
-})
+
+// Router.configure({
+//     layoutTemplate: 'landing'
+// })
+
+Router.plugin('ensureSignedIn', {
+    only: ['admin', '/admin/pools', "/admin/rounds", "/admin/scores", "/admin/teams"]
+});
 
 Router.route('/', function() {
     this.layout('landing')
     this.render('RoundOverView', {to: 'main'});
-})
+    },
+    {
+        name:"home"
+    })
 
 Router.route('/admin', function() {
     this.layout('landing');

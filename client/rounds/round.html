@@ -7,7 +7,7 @@
 					</a>
 				</h4>
 			</div>
-			<div id="collapse{{roundNumber}}" class="panel-collapse {{#unless isInteresting}} collapse {{/unless}}" role="tabpanel" aria-labelledby="heading{{roundNumber}}">
+			<div id="collapse{{roundNumber}}" class="panel-collapse {{#if isInteresting}} collapse in {{else}} collapse {{/if}}" role="tabpanel" aria-labelledby="heading{{roundNumber}}">
 				<div class="panel-body">
 					<table class="table table-striped table-bordered table-hover">
 						<thead>
