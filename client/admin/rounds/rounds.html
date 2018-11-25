@@ -1,6 +1,21 @@
 <template name="rounds">
     <h1 class="title">Rounds</h1>
+    
     <hr>
+    
+    <div class="row admin-menu">
+        <div class="col-md-3">
+            <a href="/admin/teams"><button class="btn btn-primary">Teams</button></a>
+        </div>
+        <div class="col-md-3">
+            <a href="/admin/rounds"><button class="btn btn-primary">Rounds</button></a>
+        </div>
+        <div class="col-md-3">
+            <a href="/admin/scores"><button class="btn btn-primary">Scores</button></a>
+        </div>
+    </div>
+    <hr>
+    
     <div class="row">
       {{#each rounds}}
         {{> round}}
