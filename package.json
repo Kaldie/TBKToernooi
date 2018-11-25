@@ -22,7 +22,5 @@
     },
     "testModule": "tests/main.js"
   },
-  "devDependencies": {
-    "bcrypt": "^3.0.0"
-  }
+  "devDependencies": {}
 }

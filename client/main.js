@@ -1,6 +1,7 @@
 import './landing/landing.js'
 import './admin/admin.js'
 import './rounds/roundOverView.js'
+import '../api/both/accounts_route.js'
 
 
 // Router.configure({

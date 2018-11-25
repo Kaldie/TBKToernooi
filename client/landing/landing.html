@@ -1,14 +1,15 @@
 
 <template name="landing">
   <div class="container-fluid">
-    <div class="login">
-      {{> atNavButton state='signIn'}}
-    </div>
+
     <div class="jumbotron">
       <h1 id="jumbotronText"> 
         <img id=TBKLogo src='/images/logo/TBK.png'>
         Welkom bij TBK Tafeltennis toernooi {{year}}!
       </h1>
+      <div class="login">
+        {{> atNavButton state='signIn'}}
+      </div>
     </div>
   </div>
 

@@ -1,5 +1,4 @@
 import { AccountsTemplates } from 'meteor/useraccounts:core'
-
 import './signin.html'
 
 AccountsTemplates.configure({
@@ -10,8 +9,8 @@ AccountsTemplates.configure({
 
 
 AccountsTemplates.configureRoute('signIn',{
-  name: 'login',
-  path: '/login',
+  name: 'signin',
+  path: '/signin  ',
   template: 'signin',
   layoutTemplate: 'landing',
   redirect: '/admin',
