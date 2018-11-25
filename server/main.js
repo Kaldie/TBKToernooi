@@ -1,14 +1,19 @@
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base'
 import fs from 'fs'
 import path from 'path'
+import nodemailer from 'nodemailer'
+import randomstring from 'randomstring'
 
-import '../api/teams.js';
 
 import  { ImageCollection } from '../api/collections/imageCollection.js'
 import  { RoundsCollection } from '../api/collections/roundCollection.js'
 
 import { Round } from '/api/Round.js';
 import { Match } from '/api/Match.js'
+
+import '../api/teams.js';
+
 
 var readSponsorImages = function() {
     try {
@@ -32,7 +37,7 @@ var readSponsorImages = function() {
     if (number === 0) {
 		throw "Did not find any images. Please supply nice images in: " + Meteor.settings.sponsorDir + " ."
     }
-}
+} 
 
 var addBogusRounds = function() {
 	rounds = RoundsCollection.find().fetch()
@@ -74,17 +79,55 @@ var addBogusRounds = function() {
 var updateMatchResult = function() {
 	const round = new Round(RoundsCollection.findOne())
 	const matches = round.getMatches()
-	console.log("matches", matches.length)
 	if (matches.length > 0) {
 		const aMatch = new Match(round.getMatches()[0])
 		aMatch.setResult(10,1) 
 		round.updateMatch(aMatch)
 	}
-	console.log("matches", round.getMatches())
+}
+
+var createAdminUser = function() {
+	var sendMail = function(password) {
+		var transporter = nodemailer.createTransport({
+			service: 'gmail',
+			auth: {
+			  user: Meteor.settings.mailOfAdmin,
+			  pass: Meteor.settings.passwordAdmin
+			}
+		  });
+	
+		  var mailOptions = {
+			from:  Meteor.settings.mailOfAdmin,
+			to:  Meteor.settings.mailOfAdmin,
+			subject: 'Admin password of TBKToernooi',
+			text: password
+		  };
+	
+		  transporter.sendMail(mailOptions, function(error, info){
+			if (error) {
+			  console.log(error);
+			} else {
+			  console.log('Email sent: ' + info.response);
+			}
+		  });
+		}
+
+	const password = randomstring.generate();
+
+	var adminAccount = Accounts.findUserByUsername("admin")
+	if (adminAccount) {
+		console.warn(adminAccount)
+	} else {
+		console.warn("password", password)
+		var userId = Accounts.createUser({username:"admin", password:password, email:"admin"})
+		Accounts.setPassword(userId, password, {logout:false})
+		sendMail(password) 
+	}
 }
 
 Meteor.startup(() => {
 	readSponsorImages()
 	addBogusRounds()
-    updateMatchResult() 
+	updateMatchResult()
+	createAdminUser()
 });
