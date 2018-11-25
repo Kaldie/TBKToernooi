@@ -1,3 +1,3 @@
 FROM jshimko/meteor-launchpad:devbuild
 
-ADD /home/ruud/projects/TBKToernooi images
+ADD public/ /public
